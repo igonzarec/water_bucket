@@ -60,6 +60,8 @@ class BucketRepositoryImpl implements BucketRepository {
       }
     }
 
+    print(steps.join(","));
+
     return steps;
   }
 }

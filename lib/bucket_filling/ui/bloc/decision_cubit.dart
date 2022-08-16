@@ -21,9 +21,24 @@ class DecisionCubit extends Cubit<DecisionState> {
   }
 
   void measure() {
+    // Obtain steps
     final steps = _repository.pourIfPossible(
         state.xGallons, state.yGallons, state.zGallons);
 
-    emit(state.copyWith(steps: List.of(steps)));
+    // Organize gallons for ui
+    var xGallons = state.xGallons;
+    var yGallons = state.yGallons;
+
+    if (xGallons > yGallons) {
+      int t = xGallons;
+      xGallons = yGallons;
+      yGallons = t;
+    }
+
+    emit(state.copyWith(
+      steps: List.of(steps),
+      xGallons: xGallons,
+      yGallons: yGallons,
+    ));
   }
 }
